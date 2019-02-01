@@ -2,18 +2,38 @@ import java.util.*;
 public class fracCalc {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("enter something, or type quit to quit");
-        //String calcInput = input.next();
-        //String calcInputtwo = input.next();
-        //String calcInputthree = input.next();
-        String[] terms = new String[3];
+        while (!input.equals("quit")) {
+            System.out.println("enter something, or type quit to quit");
+            String calcInput = input.next();
+            String calcInputtwo = input.next();
+            String calcInputthree = input.next();
+            String[] terms = new String[3];
+            terms[0] = calcInput;
+            terms[1] = calcInputtwo;
+            terms[2] = calcInputthree;
 
+            double newNumeratorOne = parseWhole(terms[0]) * parseDem(terms[0]) + parseNum(terms[0]);
+            double newNumeratorTwo = parseWhole(terms[2]) * parseDem(terms[2]) + parseNum(terms[2]);
+            double AD = newNumeratorOne * parseDem(terms[2]);
+            double BC = parseDem(terms[0]) * newNumeratorTwo;
+            double BD = parseDem(terms[0]) * parseDem(terms[2]);
+            double AC = newNumeratorOne * newNumeratorTwo;
+            double ADplusBC = AD + BC;
+            double ADminusBC = AD - BC;
 
-        if (!input.equals("quit")) {
-            //System.out.println(calcInput + "\n" + calcInputtwo + "\n" + calcInputthree);
-            System.out.println(parseWhole("123"));
-            System.out.println(parseNum("123 _45/678"));
-            System.out.println(parseDem("45/678"));
+            if (terms[1].equals("+")) {
+                System.out.println(ADplusBC / BD);
+            }
+            if (terms[1].equals("-")) {
+                System.out.println(ADminusBC / BD);
+            }
+            if (terms[1].equals("*")) {
+                System.out.println(AC / BD);
+            }
+            if (terms[1].equals("/")) {
+                System.out.println(AD / BC);
+            }
+
         }
 
     }
